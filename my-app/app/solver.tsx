@@ -101,21 +101,8 @@ function checkGroup(group: Group, board: Cell[][]): boolean {
       // Any order allowed → check all permutations
       return anyPermutation(nums, arr => arr.reduce((a, b) => a - b) === target);
 
-    case "÷":
-  return anyPermutation(nums, arr => {
-    let result = arr[0];
-
-    for (let i = 1; i < arr.length; i++) {
-      const next = arr[i];
-
-      // Division must produce an integer at every step
-      if (result % next !== 0) return false;
-
-      result = result / next;
-    }
-
-    return result === target;
-  });
+    case "/": // Any order allowed → check all permutations 
+        return anyPermutation(nums, arr => arr.reduce((a, b) => Math.round(a / b)) === target);
 
     case "Static":
         return nums.length === 1 && nums[0] === target;
